@@ -9,6 +9,7 @@
 #include "db_parser.h"
 #include "product_parser.h"
 #include "util.h"
+#include "mydatastore.h"
 
 using namespace std;
 struct ProdNameSorter {
@@ -29,7 +30,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    MyDataStore ds;
 
 
 
@@ -100,6 +101,64 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
+
+
+
+
+        
+
+        // need to add view cart and buy cart
+            else if( cmd == "ADD"){ 
+                
+                // MUST CHECK IF THE ITEM IS VALID
+                // MUST CHECK IF THE USERNAME IS VALID
+
+                string username;
+                int index; 
+
+				if ((ss >> username) && (ss >> index))
+				{
+                    username = convToLower(username);
+
+                    if (index <= hits.size() && index > 0 && hits.size() != 0)
+                    {
+                        ds.addToCart(username, hits[index - 1]);
+                    } 
+                    else 
+                    {
+                        std::cout << "Invalid request" << std::endl;
+                    }
+
+                }
+                else 
+                {
+                    std::cout << "Invalid username" << std::endl;
+                }
+
+            }
+            //viewing user's cart
+            else if ( cmd == "VIEWCART" )
+            {
+                string username;
+                if (ss >> username)
+                {
+                    username = convToLower(username);
+                    ds.viewCart(username);
+                }
+            }
+            //buying items in user's cart
+            else if ( cmd == "BUYCART" )
+            {
+                string username;
+                if (ss >> username)
+                {
+                    username = convToLower(username);
+                    ds.buyCart(username);
+                }
+            }
+
+
+
 
 
 
