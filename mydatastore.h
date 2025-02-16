@@ -16,7 +16,8 @@ class MyDataStore : public DataStore{
 
         // PRIVATE VARIABLES
 
-        /* a set that holds all products that the store has, inventory */
+        /* a set that holds all products that the store has, inventory 
+         * used to deallocate memory */
         std::set<Product*> products_; 
 
         /* a map that takes in a key of a user and maps it to a vector products

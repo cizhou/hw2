@@ -15,16 +15,7 @@ MyDataStore::~MyDataStore()
     for (map<User*, vector<Product*>>::iterator it = users_.begin(); it != users_.end(); ++it)
     {
         delete it->first;
-
-        // for (Product* p : it->second)
-        // {
-        //     delete p; 
-        // }
     }
-
-    products_.clear();
-    users_.clear();
-    keywords_.clear();
 }
 
 // changing string into product is taken care of by the given code
