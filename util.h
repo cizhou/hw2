@@ -22,10 +22,12 @@ std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
         if (*it1 < *it2) 
         {
             ++it1;
-        } else if (*it2 < *it1) 
+        } 
+        else if (*it2 < *it1) 
         {
             ++it2;
-        } else 
+        } 
+        else 
         {
             intersection.insert(*it1);
             ++it1;

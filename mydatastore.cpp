@@ -67,7 +67,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
     }
 
     bool first = true;
-    for (/*const */ std::string& t : terms)
+    for (std::string& t : terms)
     {
         if (first)                              // initialize searchResultSet
         {
@@ -128,13 +128,7 @@ void MyDataStore::addToCart(std::string username, Product* p)
         return;
     }
 
-    std::map<User*, std::vector<Product*>>::iterator it = users_.find(temp);
-
-    // Check if the key was found
-    if (it != users_.end()) 
-    {
-        it->second.push_back(p);
-    }
+    userToCart(temp).push_back(p);
 }
 
 void MyDataStore::viewCart(std::string username)
@@ -146,17 +140,12 @@ void MyDataStore::viewCart(std::string username)
         return;
     }
 
-    std::map<User*, std::vector<Product*>>::iterator it = users_.find(temp);
-    
-    // Check if the key was found
-    if (it != users_.end()) 
+    std::vector<Product*> cart = userToCart(temp);
+
+    for(unsigned int i = 0; i < cart.size(); i++)
     {
-        std::vector<Product*> cart = it->second;
-        for(unsigned int i = 0; i < cart.size(); i++)
-        {
-            std::cout << "Item " << i + 1 << ":" << std::endl;
-            std::cout << cart[i]->displayString() << std::endl;        
-        }
+        std::cout << "Item " << i + 1 << ":" << std::endl;
+        std::cout << cart[i]->displayString() << std::endl;        
     }
 }
 
@@ -169,11 +158,7 @@ void MyDataStore::buyCart(std::string username)
         return;
     }
 
-    std::map<User*, std::vector<Product*>>::iterator it = users_.find(temp);
-
-    if (it != users_.end()) 
-    {
-        std::vector<Product*>& cart = it->second;
+    std::vector<Product*>& cart = userToCart(temp);
         std::vector<Product*> unBoughtItems;
 
         for (Product* p : cart)
@@ -190,7 +175,6 @@ void MyDataStore::buyCart(std::string username)
         }
 
         cart = unBoughtItems;
-    }
 }
 
 
@@ -224,4 +208,10 @@ User* MyDataStore::stringToUser(std::string username)
       }
     }
     return user;
+}
+
+std::vector<Product*>& MyDataStore::userToCart(User* u)
+{
+    std::map<User*, std::vector<Product*>>::iterator it = users_.find(u);
+    return it->second;
 }

@@ -23,6 +23,7 @@ product_parser.o: product_parser.cpp product_parser.h product.h
 util.o: util.cpp util.h
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c util.cpp
 
+
 book.o: book.cpp book.h 
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c book.cpp
 clothing.o: clothing.cpp clothing.h

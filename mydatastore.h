@@ -42,6 +42,10 @@ class MyDataStore : public DataStore{
          * if function returns nullptr, show an error messagem*/
         User* stringToUser(std::string u);
 
+        /* a function that takes in a user reference and returns
+         * a cart reference */
+        std::vector<Product*>& userToCart(User* u);
+
     public: 
 
         /* METHODS MUST BE ABLE TO
@@ -72,8 +76,8 @@ class MyDataStore : public DataStore{
         void addUser(User* u); 
 
         /* input: a vector of terms and the type of search that will be performed
-         * output: a vector of product references that match the search criteria
-        std::vector<Product*> search(std::vector<std::string>& terms, int type); */
+         * output: a vector of product references that match the search criteria*/
+        std::vector<Product*> search(std::vector<std::string>& terms, int type);
 
         /* input: a ostream object reference
          * outputs everything to the ostream */
