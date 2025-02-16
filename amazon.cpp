@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
                 string username;
                 int index; 
 
-				if ((ss >> username) && (ss >> index))
+		if ((ss >> username) && (ss >> index))
 				{
                     username = convToLower(username);
 
